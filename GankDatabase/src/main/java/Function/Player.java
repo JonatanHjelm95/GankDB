@@ -14,13 +14,14 @@ public class Player {
     String name;
     String wowClass;
     String race;
-    int level = 1;
+    int level;
    // String faction = "Alliance";
 
-    public Player(String name, String wowClass, String race) {
+    public Player(String name, String wowClass, String race, int level) {
         this.name = name;
         this.wowClass = wowClass;
         this.race = race;
+        this.level = level;
     }
 
     public String getName() {

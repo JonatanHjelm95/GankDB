@@ -17,13 +17,13 @@ import java.sql.Statement;
  *
  * @author jonab
  */
-public class playerMapper {
+public class PlayerMapper {
     
      static void addPlayer(Player player) throws DBException {
         try {
             Connection con = Connector.connection();
             String SQL = "INSERT INTO `gankDB`.`alliancePlayer` (`charName`, `race`, `class`, `level`) VALUES (?,?,?,?);";
-            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, player.getName());
             ps.setString(2, player.getRace());
             ps.setString(3, player.getWowClass());
