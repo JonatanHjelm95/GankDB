@@ -5,7 +5,13 @@
  */
 package Presentation;
 
+import Function.DBException;
+import Function.LogicFacade;
 import Function.LoginSampleException;
+import Function.Player;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,7 +26,16 @@ public class AllPlayers extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        try {
+            List<Player> players = LogicFacade.getAllPlayers();
+            request.setAttribute("playersList", HTMLGenerator.allPlayersList(players));
+
+        } catch (DBException ex) {
+            Logger.getLogger(AllPlayers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return "allPlayersPage";
     }
-    
+
 }

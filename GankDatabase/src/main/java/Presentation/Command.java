@@ -22,10 +22,11 @@ abstract class Command {
         String commandName = request.getParameter("command");
         if (commands == null) {
             initCommands();
-            commands.put("NewPlayerPage", new NewPlayer());
+            commands.put("NewPlayer", new NewPlayer());
             commands.put("addPlayerRaceAndGender", new AddPlayerRaceAndGender());
             commands.put("addPlayerClass", new AddPlayerClass());
             commands.put("addPlayer", new AddPlayer());
+            commands.put("AllPlayers", new AllPlayers());
         }
         return commands.getOrDefault(commandName, new UnknownCommand());
     }

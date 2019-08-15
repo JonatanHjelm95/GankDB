@@ -5,6 +5,10 @@
  */
 package Function;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 /**
  *
  * @author jonab
@@ -18,6 +22,10 @@ public class Player {
     int level;
     //Optionals
     String guild;
+    Date date;
+
+    List notes = new ArrayList<PlayerNote>();
+    
     
     public Player(){
         
@@ -40,7 +48,7 @@ public class Player {
         this.guild = guild;
     }
 
-
+    
 
     public String getName() {
         return name;
@@ -95,4 +103,20 @@ public class Player {
         return "Player{" + "name=" + name + ", race=" + race + ", gender=" + gender + ", wowClass=" + wowClass + ", level=" + level + ", guild=" + guild + '}';
     }
     
+     public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public List getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List notes) {
+        this.notes = notes;
+    }
+   
 }

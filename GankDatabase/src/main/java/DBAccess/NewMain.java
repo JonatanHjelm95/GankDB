@@ -20,7 +20,7 @@ public class NewMain {
     public static void main(String[] args) throws DBException {
         // TODO code application logic here
         try {
-            Player player = new Player("lort", "night elf", "male", "hunter", 40);
+            Player player = new Player("bøssesvin", "night elf", "male", "hunter", 40);
             PlayerMapper.addPlayer(player);
         } catch (Exception e) {
             System.out.println(e.getLocalizedMessage());

@@ -82,15 +82,29 @@ public class HTMLGenerator {
         sb.append("     <div class=\"playersDropdown-content\">\n");
         sb.append("         <form action=\"FrontController\" method=\"POST\">\n");
         sb.append("             <input type=\"submit\" value=\"Add New Player\">\n");
-        sb.append("             <input type=\"hidden\" name=\"command\" value=\"NewPlayerPage\">\n");
+        sb.append("             <input type=\"hidden\" name=\"command\" value=\"NewPlayer\">\n");
         sb.append("         </form>");
         sb.append("         <form action=\"FrontController\" method=\"POST\">\n");
         sb.append("              <input type=\"submit\" value=\"Show All Players\">\n");
-        sb.append("              <input type=\"hidden\" name=\"command\" value=\"AllPlayersPage\">\n");
+        sb.append("              <input type=\"hidden\" name=\"command\" value=\"AllPlayers\">\n");
         sb.append("         </form>");
         sb.append("      </div>");
         sb.append(" </div>");
         sb.append("</div>");
+
+        return sb.toString();
+    }
+
+    public static String allPlayersList(List<Player> players) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<div class=\"playersList\">\n");
+        sb.append("<table class=players>\n");
+        sb.append("<tr><th>Class</th>    <th>Lvl</th>   <th>Name</th>   <th>Gender</th>    <th>Race</th>    <th>Created</th></tr>");
+        for (int i = 0; i < players.size(); i++) {
+            sb.append("<tr><td>"+players.get(i).getWowClass()+"</td><td>"+players.get(i).getLevel()+"</td><td>"+players.get(i).getName()+"</td><td>"+players.get(i).getGender()+"</td><td>"+players.get(i).getRace()+"</td><td>"+players.get(i).getDate()+"</td></tr>");
+        }
+        sb.append("</table>\n");
+        sb.append("</div>\n");
 
         return sb.toString();
     }

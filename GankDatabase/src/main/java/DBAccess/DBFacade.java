@@ -7,6 +7,7 @@ package DBAccess;
 
 import Function.DBException;
 import Function.Player;
+import java.util.List;
 
 /**
  *
@@ -19,5 +20,9 @@ public class DBFacade {
     
     public static void addPlayerNotes(Player player, String note) throws DBException{
         PlayerMapper.addPlayerNotes(player, note);
+    }
+    
+    public static List getAllPlayers() throws DBException{
+        return PlayerMapper.getAllPlayers();
     }
 }

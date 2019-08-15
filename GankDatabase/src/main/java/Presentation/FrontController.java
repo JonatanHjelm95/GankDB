@@ -7,6 +7,8 @@ package Presentation;
 
 import Function.LoginSampleException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author kasper
+ * @author Jonatan
  */
 @WebServlet(name = "FrontController", urlPatterns = {"/FrontController"})
 public class FrontController extends HttpServlet {
@@ -31,6 +33,9 @@ public class FrontController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
         try {
             Command action = Command.from(request);
             request.setAttribute("topnav", HTMLGenerator.Navigation());
@@ -39,8 +44,13 @@ public class FrontController extends HttpServlet {
         } catch (LoginSampleException ex) {
             request.setAttribute("error", ex.getMessage());
             request.setAttribute("newPlayerPageButton", HTMLGenerator.Navigation());
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
         }
+    }
+
+    public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, UnsupportedEncodingException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        chain.doFilter(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
