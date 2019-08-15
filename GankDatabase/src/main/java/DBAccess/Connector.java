@@ -1,4 +1,4 @@
-package DBAccess;
+    package DBAccess;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,7 +11,7 @@ import java.sql.SQLException;
  */
 public class Connector {
 
-    private static final String URL = "jdbc:mysql://104.248.17.255:3306/gankDB";
+    private static final String URL = "jdbc:mysql://104.248.17.255:3306/gankDB?useUnicode=yes&characterEncoding=UTF-8";
     private static final String USERNAME = "transformer";
     private static final String PASSWORD = "transformerpass";
 

@@ -15,11 +15,13 @@ public class Player {
     String race;
     String gender;
     String wowClass;
-
-    
     int level;
+    //Optionals
     String guild;
-   // String faction = "Alliance";
+    
+    public Player(){
+        
+    }
 
     public Player(String name, String race, String gender, String wowClass, int level) {
         this.name = name;

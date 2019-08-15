@@ -1,6 +1,8 @@
 package Presentation;
 
 import Function.LoginSampleException;
+import static Presentation.HTMLGenerator.AddPlayerClass;
+import static Presentation.HTMLGenerator.AddPlayerRaceAndGender;
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +22,10 @@ abstract class Command {
         String commandName = request.getParameter("command");
         if (commands == null) {
             initCommands();
+            commands.put("NewPlayerPage", new NewPlayer());
+            commands.put("addPlayerRaceAndGender", new AddPlayerRaceAndGender());
+            commands.put("addPlayerClass", new AddPlayerClass());
+            commands.put("addPlayer", new AddPlayer());
         }
         return commands.getOrDefault(commandName, new UnknownCommand());
     }

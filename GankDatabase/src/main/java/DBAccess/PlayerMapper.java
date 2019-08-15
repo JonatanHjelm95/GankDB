@@ -30,6 +30,19 @@ public class PlayerMapper {
             ps.setString(4, player.getWowClass());
             ps.setInt(5, player.getLevel());
             ps.setString(6, player.getGuild());
+            
+            ps.executeUpdate();
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new DBException(ex.getMessage());
+        }
+    }
+    static void addPlayerNotes(Player player, String note) throws DBException {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "INSERT INTO `gankDB`.`playerNotes` (`name`, `notes`) VALUES (?,?);";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, player.getName());
+            ps.setString(2, note);
             ps.executeUpdate();
         } catch (SQLException | ClassNotFoundException ex) {
             throw new DBException(ex.getMessage());

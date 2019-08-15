@@ -18,7 +18,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema gankDB
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `gankDB` DEFAULT CHARACTER SET latin1 ;
+CREATE SCHEMA IF NOT EXISTS `gankDB` DEFAULT CHARACTER SET utf8 COLLATE=utf8_danish_ci;
 USE `gankDB` ;
 
 -- -----------------------------------------------------
@@ -34,9 +34,7 @@ CREATE TABLE IF NOT EXISTS `gankDB`.`alliancePlayer` (
   `guild` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`charName`),
   UNIQUE INDEX `charName_UNIQUE` (`charName` ASC))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
-
+ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_danish_ci; 
 
 -- -----------------------------------------------------
 -- Table `gankDB`.`playerNotes`
@@ -50,8 +48,7 @@ CREATE TABLE IF NOT EXISTS `gankDB`.`playerNotes` (
     REFERENCES `gankDB`.`alliancePlayer` (`charName`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
+ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_danish_ci; 
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

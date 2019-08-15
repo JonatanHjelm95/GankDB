@@ -16,4 +16,8 @@ public class DBFacade {
     public static void addPlayer(Player player) throws DBException {
         PlayerMapper.addPlayer(player);
     }
+    
+    public static void addPlayerNotes(Player player, String note) throws DBException{
+        PlayerMapper.addPlayerNotes(player, note);
+    }
 }
