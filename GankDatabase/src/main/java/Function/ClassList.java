@@ -55,7 +55,7 @@ public class ClassList {
 
             return gnomeList;
         }
-        if (playerRace.equals("Night Elf")) {
+        if (playerRace.equals("Night-Elf")) {
 
             return nelfList;
         }

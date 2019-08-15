@@ -22,7 +22,7 @@ public class HTMLGenerator {
         sb.append("  <option value=\"Dwarf\">Dwarf</option>\n");
         sb.append("  <option value=\"Human\" Selected>Human</option>\n");
         sb.append("  <option value=\"Gnome\">Gnome</option>\n");
-        sb.append("  <option value=\"Night Elf\">Night Elf</option>\n");
+        sb.append("  <option value=\"NightElf\">Night Elf</option>\n");
         sb.append(" </select>");
         sb.append(" <select name=\"Gender\">\n");
         sb.append("  <option value=\"Female\">Female</option>\n");
@@ -96,12 +96,21 @@ public class HTMLGenerator {
     }
 
     public static String allPlayersList(List<Player> players) {
+        String classIcon = "icons/Ui-charactercreate-classes_";
+        String raceIcon = "icons/Ui-charactercreate-races_";
+        String png = ".png";
+
         StringBuilder sb = new StringBuilder();
         sb.append("<div class=\"playersList\">\n");
         sb.append("<table class=players>\n");
-        sb.append("<tr><th>Class</th>    <th>Lvl</th>   <th>Name</th>   <th>Gender</th>    <th>Race</th>    <th>Created</th></tr>");
+        sb.append("<tr><th>Level</th>    <th>Race</th>   <th>Class</th>   <th>Name</th>    <th>Created</th></tr>");
         for (int i = 0; i < players.size(); i++) {
-            sb.append("<tr><td>"+players.get(i).getWowClass()+"</td><td>"+players.get(i).getLevel()+"</td><td>"+players.get(i).getName()+"</td><td>"+players.get(i).getGender()+"</td><td>"+players.get(i).getRace()+"</td><td>"+players.get(i).getDate()+"</td></tr>");
+            classIcon = classIcon + players.get(i).getWowClass().toLowerCase()+png;
+            raceIcon = raceIcon + players.get(i).getRace().toLowerCase()+"-"+players.get(i).getGender().toLowerCase()+png;
+            sb.append("<tr><td>" + players.get(i).getLevel() + "</td><td><img src=\""+raceIcon+"\"></td><td><img src=\""+classIcon+"\"></td>    <td>" + players.get(i).getName() + "</td><td>" + players.get(i).getDate() + "</td></tr>");
+            classIcon = "icons/Ui-charactercreate-classes_";
+            raceIcon = "icons/Ui-charactercreate-races_";
+            png = ".png";
         }
         sb.append("</table>\n");
         sb.append("</div>\n");
