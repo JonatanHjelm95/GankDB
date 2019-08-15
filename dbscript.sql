@@ -11,37 +11,47 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `gankDB` DEFAULT CHARACTER SET utf8 ;
 -- -----------------------------------------------------
 -- Schema gankDB
 -- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema gankDB
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `gankDB` DEFAULT CHARACTER SET latin1 ;
 USE `gankDB` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`alliancePlayer`
+-- Table `gankDB`.`alliancePlayer`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `gankDB`.`alliancePlayer` (
   `charName` VARCHAR(12) NOT NULL,
   `race` VARCHAR(255) NOT NULL,
+  `gender` VARCHAR(45) NOT NULL,
   `class` VARCHAR(32) NOT NULL,
   `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `level` INT NULL,
+  `level` INT(11) NULL DEFAULT NULL,
+  `guild` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`charName`),
-  UNIQUE INDEX `charName_UNIQUE` (`charName` ASC));
+  UNIQUE INDEX `charName_UNIQUE` (`charName` ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`playerNotes`
+-- Table `gankDB`.`playerNotes`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `gankDB`.`playerNotes` (
   `name` VARCHAR(45) NOT NULL,
-  `notes` VARCHAR(255) NULL,
+  `notes` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`name`),
   CONSTRAINT `charName`
     FOREIGN KEY (`name`)
     REFERENCES `gankDB`.`alliancePlayer` (`charName`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

@@ -18,24 +18,22 @@ import java.sql.Statement;
  * @author jonab
  */
 public class PlayerMapper {
-    
-     static void addPlayer(Player player) throws DBException {
+
+    static void addPlayer(Player player) throws DBException {
         try {
             Connection con = Connector.connection();
-            String SQL = "INSERT INTO `gankDB`.`alliancePlayer` (`charName`, `race`, `class`, `level`) VALUES (?,?,?,?);";
+            String SQL = "INSERT INTO `gankDB`.`alliancePlayer` (`charName`, `race`, `gender`, `class`, `level`, `guild`) VALUES (?,?,?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, player.getName());
             ps.setString(2, player.getRace());
-            ps.setString(3, player.getWowClass());
-            ps.setInt(4, player.getLevel());
+            ps.setString(3, player.getGender());
+            ps.setString(4, player.getWowClass());
+            ps.setInt(5, player.getLevel());
+            ps.setString(6, player.getGuild());
             ps.executeUpdate();
-//            ResultSet ids = ps.getGeneratedKeys();
-//            ids.next();
-//            int id = ids.getInt(1);
-//            user.setId(id);
         } catch (SQLException | ClassNotFoundException ex) {
             throw new DBException(ex.getMessage());
         }
     }
-    
+
 }

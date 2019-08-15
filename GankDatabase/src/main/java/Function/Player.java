@@ -12,17 +12,33 @@ package Function;
 public class Player {
     
     String name;
-    String wowClass;
     String race;
+    String gender;
+    String wowClass;
+
+    
     int level;
+    String guild;
    // String faction = "Alliance";
 
-    public Player(String name, String wowClass, String race, int level) {
+    public Player(String name, String race, String gender, String wowClass, int level) {
         this.name = name;
-        this.wowClass = wowClass;
         this.race = race;
+        this.gender = gender;
+        this.wowClass = wowClass;
         this.level = level;
     }
+
+    public Player(String name, String race, String gender, String wowClass, int level, String guild) {
+        this.name = name;
+        this.race = race;
+        this.gender = gender;
+        this.wowClass = wowClass;
+        this.level = level;
+        this.guild = guild;
+    }
+
+
 
     public String getName() {
         return name;
@@ -54,6 +70,27 @@ public class Player {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+    
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getGuild() {
+        return guild;
+    }
+
+    public void setGuild(String guild) {
+        this.guild = guild;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" + "name=" + name + ", race=" + race + ", gender=" + gender + ", wowClass=" + wowClass + ", level=" + level + ", guild=" + guild + '}';
     }
     
 }
