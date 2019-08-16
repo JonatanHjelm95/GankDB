@@ -32,13 +32,19 @@ public class AddPlayer extends Command {
             charName = charName.substring(0, 1).toUpperCase() + charName.substring(1, charName.length()).toLowerCase();
             player.setLevel(level);
             player.setName(charName);
-            player.setGuild(request.getParameter("guild"));
+            String guild = request.getParameter("guild");
+
+            if (guild.isEmpty()) {
+                player.setGuild("N/A");
+            } else {
+                player.setGuild(request.getParameter("guild"));
+            }
             try {
                 LogicFacade.addPlayer(player);
             } catch (DBException ex) {
                 Logger.getLogger(AddPlayer.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if(!request.getParameter("notes").isEmpty()){
+            if (!request.getParameter("notes").isEmpty()) {
                 String note = request.getParameter("notes");
                 try {
                     LogicFacade.addPlayerNotes(player, note);

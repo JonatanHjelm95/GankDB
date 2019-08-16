@@ -1,3 +1,7 @@
+@font-face {
+  font-family: LifeCraftFont;
+  src: url("LifeCraft_Font.ttf");
+}
 body {  
         background-color: black;
         background-image: url("icons/bodyBackground.png");
@@ -51,14 +55,22 @@ li {
 
 
 
-.mastHead{
-    width:300px;
+#mastHead{
+    
+    max-width: 100%;
+    height:30px;
+    object-fit: contain;
+    margin: 3px;
+    /*width:300px;*/
     /*margin-bottom: 50px;*/
-    height: 40px;
+/*    height: 40px;
     background-color: blue;
     text-align: center;
     vertical-align:text-top;
-    position: absolute;
+    position: absolute;*/
+/*    font-family: LifeCraftFont;
+    letter-spacing: 8px;
+    color: black;*/
 }
 
 #Home {
@@ -80,4 +92,23 @@ li {
     max-height: 100%;
     background-repeat: no-repeat;
     background-position: 2% 50%;
+}
+
+.tableInput {
+    background-color:rgba(0, 0, 0, 0.5);
+    border:none;
+    width: 100%;
+}
+.inspect{
+    background-color:rgba(0, 0, 0, 0.0);
+    border:none;
+    width: 100%;
+    height: 100%;
+}
+table, td {
+    text-align: center;
+}
+.levelField {
+    font-size: 18px;
+    font-family: LifeCraftFont;
 }

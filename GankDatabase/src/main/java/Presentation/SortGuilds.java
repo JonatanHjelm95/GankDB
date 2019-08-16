@@ -10,6 +10,7 @@ import Function.LogicFacade;
 import Function.LoginSampleException;
 import Function.Player;
 import Function.SorterClasses;
+import Function.SorterGuilds;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;

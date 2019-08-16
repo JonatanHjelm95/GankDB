@@ -97,11 +97,7 @@ public class HTMLGenerator {
         sb.append("              <input type=\"hidden\" name=\"command\" value=\"AllPlayers\">\n");
         sb.append("         </form>");
         sb.append("        </li>");
-  //      sb.append("        <li class=\"mastHead\">");
-        sb.append("         <h1 id=\"mastHead\">");
-        sb.append("GSS HITLIST");
-        sb.append("         </h1>");
-    //    sb.append("        </li>");
+        sb.append("         <img id=\"mastHead\" src=\"icons/MastHead.png\">");
         sb.append("     </ul>");
         sb.append(" </div>");
         sb.append("</div>");
@@ -109,26 +105,6 @@ public class HTMLGenerator {
         return sb.toString();
     }
 
-    public static String Navigation2() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("<div class=\"topnav\">\n");
-        sb.append(" <div class=\"playersDropdown\">\n");
-        sb.append(" <button class=\"playersDropdown-btn\">Players</button>");
-        sb.append("     <div class=\"playersDropdown-content\">\n");
-        sb.append("         <form action=\"FrontController\" method=\"POST\">\n");
-        sb.append("             <input type=\"submit\" value=\"Add New Player\">\n");
-        sb.append("             <input type=\"hidden\" name=\"command\" value=\"NewPlayer\">\n");
-        sb.append("         </form>");
-        sb.append("         <form action=\"FrontController\" method=\"POST\">\n");
-        sb.append("              <input type=\"submit\" value=\"Show All Players\">\n");
-        sb.append("              <input type=\"hidden\" name=\"command\" value=\"AllPlayers\">\n");
-        sb.append("         </form>");
-        sb.append("      </div>");
-        sb.append(" </div>");
-        sb.append("</div>");
-
-        return sb.toString();
-    }
 
     public static String allPlayersList(List<Player> players) {
         String classIcon = "icons/Ui-charactercreate-classes_";
@@ -138,12 +114,12 @@ public class HTMLGenerator {
         StringBuilder sb = new StringBuilder();
         sb.append("<div class=\"playersList\">\n");
         sb.append("<table class=players>\n");
-        sb.append("<tr><th><form action\"FrontController\" method=\"POST\"><input type=\"hidden\" name=\"command\" value=\"SortLevel\"><input type=\"submit\" value=\"Level\"></form></th>"
-                + "    <th><form action\"FrontController\" method=\"POST\"><input type=\"hidden\" name=\"command\" value=\"SortRace\"><input type=\"submit\" value=\"Race\"></form></th>"
-                + "   <th><form action\"FrontController\" method=\"POST\"><input type=\"hidden\" name=\"command\" value=\"SortClass\"><input type=\"submit\" value=\"Class\"></form></th>"
-                + "   <th><form action\"FrontController\" method=\"POST\"><input type=\"hidden\" name=\"command\" value=\"SortName\"><input type=\"submit\" value=\"Name\"></form></th>"
-                + "    <th><form action\"FrontController\" method=\"POST\"><input type=\"hidden\" name=\"command\" value=\"SortGuild\"><input type=\"submit\" value=\"Guild\"></form></th>"
-                + "    <th><form action\"FrontController\" method=\"POST\"><input type=\"hidden\" name=\"command\" value=\"SortCreated\"><input type=\"submit\" value=\"Created\"></form></th>"
+        sb.append("<tr><th><form action\"FrontController\" method=\"POST\"><input type=\"hidden\" name=\"command\" value=\"SortLevel\"><input type=\"submit\" class=\"tableInput\" value=\"Level\"></form></th>"
+                + "    <th><form action\"FrontController\" method=\"POST\"><input type=\"hidden\" name=\"command\" value=\"SortRace\"><input type=\"submit\" class=\"tableInput\" value=\"Race\"></form></th>"
+                + "   <th><form action\"FrontController\" method=\"POST\"><input type=\"hidden\"  name=\"command\" value=\"SortClass\"><input type=\"submit\" class=\"tableInput\" value=\"Class\"></form></th>"
+                + "   <th><form action\"FrontController\" method=\"POST\"><input type=\"hidden\"  name=\"command\" value=\"SortName\"><input type=\"submit\" class=\"tableInput\" value=\"Name\"></form></th>"
+                + "    <th><form action\"FrontController\" method=\"POST\"><input type=\"hidden\" name=\"command\" value=\"SortGuild\"><input type=\"submit\" class=\"tableInput\" value=\"Guild\"></form></th>"
+                + "    <th><form action\"FrontController\" method=\"POST\"><input type=\"hidden\" name=\"command\" value=\"SortCreated\"><input type=\"submit\" class=\"tableInput\" value=\"Created\"></form></th>"
                 + "</tr>");
         for (int i = 0; i < players.size(); i++) {
             sb.append("<form action=\"FrontController\" method=\"POST\">\n");
@@ -151,7 +127,7 @@ public class HTMLGenerator {
             sb.append("<input type=\"hidden\" name=\"playerName\" value=\"").append(players.get(i).getName()).append("\">\n");
             classIcon = classIcon + players.get(i).getWowClass().toLowerCase() + png;
             raceIcon = raceIcon + players.get(i).getRace().toLowerCase() + "-" + players.get(i).getGender().toLowerCase() + png;
-            sb.append("<tr><td>" + players.get(i).getLevel() + "</td><td><img src=\"" + raceIcon + "\"></td><td><img src=\"" + classIcon + "\"></td>    <td>" + players.get(i).getName() + "</td>   <td>" + players.get(i).getGuild() + "</td><td>" + players.get(i).getDate() + "</td><td><input class=\"inspect\" type=\"submit\" value=\"Inspect\"></form></td></tr>\n");
+            sb.append("<tr><td class=\"levelField\">" + players.get(i).getLevel() + "</td><td><img src=\"" + raceIcon + "\"></td><td><img src=\"" + classIcon + "\"></td>    <td>" + players.get(i).getName() + "</td>   <td>" + players.get(i).getGuild() + "</td><td>" + players.get(i).getDate() + "</td><td><input class=\"inspect\" type=\"submit\" value=\"Inspect\"></form></td></tr>\n");
             classIcon = "icons/Ui-charactercreate-classes_";
             raceIcon = "icons/Ui-charactercreate-races_";
             png = ".png";
