@@ -61,16 +61,7 @@ li {
     height:30px;
     object-fit: contain;
     margin: 3px;
-    /*width:300px;*/
-    /*margin-bottom: 50px;*/
-/*    height: 40px;
-    background-color: blue;
-    text-align: center;
-    vertical-align:text-top;
-    position: absolute;*/
-/*    font-family: LifeCraftFont;
-    letter-spacing: 8px;
-    color: black;*/
+
 }
 
 #Home {
@@ -107,6 +98,7 @@ li {
 }
 table, td {
     text-align: center;
+    border:solid 2px #999999;
 }
 .levelField {
     font-size: 18px;
