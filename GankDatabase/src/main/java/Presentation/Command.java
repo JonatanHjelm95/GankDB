@@ -27,6 +27,13 @@ abstract class Command {
             commands.put("addPlayerClass", new AddPlayerClass());
             commands.put("addPlayer", new AddPlayer());
             commands.put("AllPlayers", new AllPlayers());
+            commands.put("Inspect", new InspectPlayer());
+            commands.put("SortLevel", new SortLevels());
+            commands.put("SortRace", new SortRaces());
+            commands.put("SortClass", new SortClasses());
+            commands.put("SortName", new SortNames());
+            commands.put("SortGuild", new SortGuilds());
+            commands.put("SortCreated", new SortCreated());
         }
         return commands.getOrDefault(commandName, new UnknownCommand());
     }

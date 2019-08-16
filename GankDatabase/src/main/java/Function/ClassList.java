@@ -19,7 +19,6 @@ public class ClassList {
         
         List dwarfList = new ArrayList();
         dwarfList.add("Warrior");
-        dwarfList.add("Paladin");
         dwarfList.add("Hunter");
         dwarfList.add("Rogue");
         dwarfList.add("Priest");

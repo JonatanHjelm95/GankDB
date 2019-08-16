@@ -6,6 +6,7 @@
 package Function;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -14,9 +15,11 @@ import java.util.Date;
  */
 public class TimestampToDate {
 
-    public static Date convert(Timestamp time) {
+    public static String convert(Timestamp time) {
         Date date = new Date(time.getTime());
-        return date;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-dd-M HH:mm:ss");  
+        String strDate = formatter.format(date);
+        return strDate;
     }
 
 }

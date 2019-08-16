@@ -71,12 +71,37 @@ public class PlayerMapper {
         while (rs.next()) {
             String note = rs.getString("notes");
             Timestamp createTimeTS = rs.getTimestamp("create_time");
-            Date createTime = (Date) TimestampToDate.convert(createTimeTS);
+            String createTime = (String) TimestampToDate.convert(createTimeTS);
 
             PlayerNote playerNote = new PlayerNote(note, createTime);
             notes.add(playerNote);
         }
         return notes;
+    }
+
+    static Player getPlayerByName(String name) throws SQLException, ClassNotFoundException {
+        Connection con = Connector.connection();
+        String SQL = "SELECT * FROM gankDB.alliancePlayer where charName = '"+name+"';";
+
+        PreparedStatement ps = con.prepareStatement(SQL);
+        ResultSet rs = ps.executeQuery();
+        Player player = new Player();
+        while (rs.next()) {
+            String charName = rs.getString("charName");
+            String race = rs.getString("race");
+            String gender = rs.getString("gender");
+            String wowClass = rs.getString("class");
+            Timestamp createTimeTS = rs.getTimestamp("create_time");
+            String createTime = (String) TimestampToDate.convert(createTimeTS);
+            int level = rs.getInt("level");
+            String guild = rs.getString("guild");
+
+            player = new Player(charName, race, gender, wowClass, level, guild);
+            player.setDate(createTime);
+
+        }
+        return player;
+
     }
 
     static List<Player> getAllPlayers() throws DBException {
@@ -93,7 +118,7 @@ public class PlayerMapper {
                 String gender = rs.getString("gender");
                 String wowClass = rs.getString("class");
                 Timestamp createTimeTS = rs.getTimestamp("create_time");
-                Date createTime = (Date) TimestampToDate.convert(createTimeTS);
+                String createTime = (String) TimestampToDate.convert(createTimeTS);
                 int level = rs.getInt("level");
                 String guild = rs.getString("guild");
 

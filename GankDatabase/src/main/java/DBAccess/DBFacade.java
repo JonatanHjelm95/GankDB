@@ -7,6 +7,7 @@ package DBAccess;
 
 import Function.DBException;
 import Function.Player;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -24,5 +25,9 @@ public class DBFacade {
     
     public static List getAllPlayers() throws DBException{
         return PlayerMapper.getAllPlayers();
+    }
+    
+    public static Player getPlayerByName(String name) throws SQLException, ClassNotFoundException{
+        return PlayerMapper.getPlayerByName(name);
     }
 }

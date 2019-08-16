@@ -13,9 +13,9 @@ import java.util.Date;
  */
 public class PlayerNote {
     String note;
-    Date date;
+    String date;
 
-    public PlayerNote(String note, Date date) {
+    public PlayerNote(String note, String date) {
         this.note = note;
         this.date = date;
     }
@@ -28,11 +28,11 @@ public class PlayerNote {
         this.note = note;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }

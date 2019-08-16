@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `gankDB`.`alliancePlayer` (
   `class` VARCHAR(32) NOT NULL,
   `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   `level` INT(11) NULL DEFAULT NULL,
-  `guild` VARCHAR(45) NULL DEFAULT 'N/A',
+  `guild` VARCHAR(45) NOT NULL DEFAULT '-',
   PRIMARY KEY (`charName`),
   UNIQUE INDEX `charName_UNIQUE` (`charName` ASC))
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci; 

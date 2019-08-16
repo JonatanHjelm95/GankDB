@@ -77,6 +77,41 @@ public class HTMLGenerator {
     public static String Navigation() {
         StringBuilder sb = new StringBuilder();
         sb.append("<div class=\"topnav\">\n");
+        sb.append(" <div class=\"navTiles\">\n");
+        sb.append("     <ul>");
+        sb.append("        <li>");
+        sb.append("         <form action=\"FrontController\" method=\"POST\">\n");
+        sb.append("             <input class=\"menuTiles\" id=\"Home\" type=\"submit\" value=\"Home\">\n");
+        sb.append("             <input type=\"hidden\" name=\"command\" value=\"Home\">\n");
+        sb.append("         </form>");
+        sb.append("        </li>");
+        sb.append("        <li class=\"listTiles\">");
+        sb.append("         <form action=\"FrontController\" method=\"POST\">\n");
+        sb.append("             <input class=\"menuTiles\" id=\"NewPlayerIcon\" type=\"submit\" value=\"Add New Player\">\n");
+        sb.append("             <input type=\"hidden\" name=\"command\" value=\"NewPlayer\">\n");
+        sb.append("         </form>");
+        sb.append("        </li>");
+        sb.append("        <li class=\"listTiles\">");
+        sb.append("         <form action=\"FrontController\" method=\"POST\">\n");
+        sb.append("              <input class=\"menuTiles\" id=\"ShowAllPlayers\" type=\"submit\" value=\"Show All Players\">\n");
+        sb.append("              <input type=\"hidden\" name=\"command\" value=\"AllPlayers\">\n");
+        sb.append("         </form>");
+        sb.append("        </li>");
+  //      sb.append("        <li class=\"mastHead\">");
+        sb.append("         <h1 id=\"mastHead\">");
+        sb.append("GSS HITLIST");
+        sb.append("         </h1>");
+    //    sb.append("        </li>");
+        sb.append("     </ul>");
+        sb.append(" </div>");
+        sb.append("</div>");
+
+        return sb.toString();
+    }
+
+    public static String Navigation2() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<div class=\"topnav\">\n");
         sb.append(" <div class=\"playersDropdown\">\n");
         sb.append(" <button class=\"playersDropdown-btn\">Players</button>");
         sb.append("     <div class=\"playersDropdown-content\">\n");
@@ -103,11 +138,20 @@ public class HTMLGenerator {
         StringBuilder sb = new StringBuilder();
         sb.append("<div class=\"playersList\">\n");
         sb.append("<table class=players>\n");
-        sb.append("<tr><th>Level</th>    <th>Race</th>   <th>Class</th>   <th>Name</th>    <th>Created</th></tr>");
+        sb.append("<tr><th><form action\"FrontController\" method=\"POST\"><input type=\"hidden\" name=\"command\" value=\"SortLevel\"><input type=\"submit\" value=\"Level\"></form></th>"
+                + "    <th><form action\"FrontController\" method=\"POST\"><input type=\"hidden\" name=\"command\" value=\"SortRace\"><input type=\"submit\" value=\"Race\"></form></th>"
+                + "   <th><form action\"FrontController\" method=\"POST\"><input type=\"hidden\" name=\"command\" value=\"SortClass\"><input type=\"submit\" value=\"Class\"></form></th>"
+                + "   <th><form action\"FrontController\" method=\"POST\"><input type=\"hidden\" name=\"command\" value=\"SortName\"><input type=\"submit\" value=\"Name\"></form></th>"
+                + "    <th><form action\"FrontController\" method=\"POST\"><input type=\"hidden\" name=\"command\" value=\"SortGuild\"><input type=\"submit\" value=\"Guild\"></form></th>"
+                + "    <th><form action\"FrontController\" method=\"POST\"><input type=\"hidden\" name=\"command\" value=\"SortCreated\"><input type=\"submit\" value=\"Created\"></form></th>"
+                + "</tr>");
         for (int i = 0; i < players.size(); i++) {
-            classIcon = classIcon + players.get(i).getWowClass().toLowerCase()+png;
-            raceIcon = raceIcon + players.get(i).getRace().toLowerCase()+"-"+players.get(i).getGender().toLowerCase()+png;
-            sb.append("<tr><td>" + players.get(i).getLevel() + "</td><td><img src=\""+raceIcon+"\"></td><td><img src=\""+classIcon+"\"></td>    <td>" + players.get(i).getName() + "</td><td>" + players.get(i).getDate() + "</td></tr>");
+            sb.append("<form action=\"FrontController\" method=\"POST\">\n");
+            sb.append("<input type=\"hidden\" name=\"command\" value=\"Inspect\">\n");
+            sb.append("<input type=\"hidden\" name=\"playerName\" value=\"").append(players.get(i).getName()).append("\">\n");
+            classIcon = classIcon + players.get(i).getWowClass().toLowerCase() + png;
+            raceIcon = raceIcon + players.get(i).getRace().toLowerCase() + "-" + players.get(i).getGender().toLowerCase() + png;
+            sb.append("<tr><td>" + players.get(i).getLevel() + "</td><td><img src=\"" + raceIcon + "\"></td><td><img src=\"" + classIcon + "\"></td>    <td>" + players.get(i).getName() + "</td>   <td>" + players.get(i).getGuild() + "</td><td>" + players.get(i).getDate() + "</td><td><input class=\"inspect\" type=\"submit\" value=\"Inspect\"></form></td></tr>\n");
             classIcon = "icons/Ui-charactercreate-classes_";
             raceIcon = "icons/Ui-charactercreate-races_";
             png = ".png";
@@ -115,6 +159,16 @@ public class HTMLGenerator {
         sb.append("</table>\n");
         sb.append("</div>\n");
 
+        return sb.toString();
+    }
+
+    public static String generatePlayerPage(Player player) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<div=\"playerDiv\">");
+        sb.append("<h1>");
+        sb.append(player.getName());
+        sb.append("</h1>");
+        sb.append("</div>");
         return sb.toString();
     }
 }
