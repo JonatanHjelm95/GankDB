@@ -10,6 +10,7 @@ import Function.LogicFacade;
 import Function.LoginSampleException;
 import Function.Player;
 import Function.SorterRaces;
+import Function.SorterRacesReverse;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
@@ -30,10 +31,18 @@ public class SortRaces extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         
         try {
+ boolean reverse = (boolean) request.getSession(false).getAttribute("reverse");
             List<Player> players = LogicFacade.getAllPlayers();
-            
-            Collections.sort(players, new SorterRaces());
-            
+            if (!reverse) {
+                Collections.sort(players, new SorterRaces());
+                reverse = true;
+                request.getSession(false).setAttribute("reverse", reverse);
+            } else {
+                Collections.sort(players, new SorterRacesReverse());
+                reverse = false;
+                request.getSession(false).setAttribute("reverse", reverse);
+
+            }
             request.setAttribute("playersList", HTMLGenerator.allPlayersList(players));
             return "allPlayersPage";
 

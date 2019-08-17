@@ -26,10 +26,11 @@ public class AllPlayers extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
-
+        boolean reverse = false;
         try {
             List<Player> players = LogicFacade.getAllPlayers();
             request.setAttribute("playersList", HTMLGenerator.allPlayersList(players));
+            request.getSession(false).setAttribute("reverse", reverse);
 
         } catch (DBException ex) {
             Logger.getLogger(AllPlayers.class.getName()).log(Level.SEVERE, null, ex);

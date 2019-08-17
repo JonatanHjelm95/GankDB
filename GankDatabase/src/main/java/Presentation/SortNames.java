@@ -11,6 +11,7 @@ import Function.LoginSampleException;
 import Function.Player;
 import Function.SorterClasses;
 import Function.SorterNames;
+import Function.SorterNamesReverse;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
@@ -29,9 +30,19 @@ public class SortNames extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
-       try {
+        try {
+            boolean reverse = (boolean) request.getSession(false).getAttribute("reverse");
             List<Player> players = LogicFacade.getAllPlayers();
-            Collections.sort(players, new SorterNames());
+            if (!reverse) {
+                Collections.sort(players, new SorterNames());
+                reverse = true;
+                request.getSession(false).setAttribute("reverse", reverse);
+            } else {
+                Collections.sort(players, new SorterNamesReverse());
+                reverse = false;
+                request.getSession(false).setAttribute("reverse", reverse);
+
+            }
             request.setAttribute("playersList", HTMLGenerator.allPlayersList(players));
             return "allPlayersPage";
 
@@ -41,5 +52,5 @@ public class SortNames extends Command {
 
         return "allPlayersPage";
     }
-    
+
 }

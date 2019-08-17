@@ -11,6 +11,7 @@ import Function.LoginSampleException;
 import Function.Player;
 import Function.SorterClasses;
 import Function.SorterGuilds;
+import Function.SorterGuildsReverse;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
@@ -30,8 +31,18 @@ public class SortGuilds extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         try {
+            boolean reverse = (boolean) request.getSession(false).getAttribute("reverse");
             List<Player> players = LogicFacade.getAllPlayers();
-            Collections.sort(players, new SorterGuilds());
+            if (!reverse) {
+                Collections.sort(players, new SorterGuilds());
+                reverse = true;
+                request.getSession(false).setAttribute("reverse", reverse);
+            } else {
+                Collections.sort(players, new SorterGuildsReverse());
+                reverse = false;
+                request.getSession(false).setAttribute("reverse", reverse);
+
+            }
             request.setAttribute("playersList", HTMLGenerator.allPlayersList(players));
             return "allPlayersPage";
 
