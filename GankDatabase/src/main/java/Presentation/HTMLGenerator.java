@@ -103,7 +103,7 @@ public class HTMLGenerator {
         sb.append("        <li class=\"listTilesRight\">");
         sb.append("         <form action=\"FrontController\" method=\"POST\">\n");
         sb.append("              <input class=\"menuTiles\" id=\"Search\" type=\"submit\" value=\"Search\">\n");
-        sb.append("              <input type=\"hidden\" name=\"command\" value=\"AllPlayers\">\n");
+        sb.append("              <input type=\"hidden\" name=\"command\" value=\"SearchPlayer\">\n");
         sb.append("         </form>");
         sb.append("        </li>");
 
@@ -153,6 +153,55 @@ public class HTMLGenerator {
         sb.append(player.getName());
         sb.append("</h1>");
         sb.append("</div>");
+        return sb.toString();
+    }
+
+    public static String generateDatalist(List<Player> players) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<datalist id=\"players\">\n");
+        for (int i = 0; i < players.size(); i++) {
+            sb.append("<option value=\"" + players.get(i).getName() + "\">");
+        }
+        sb.append("</datalist>");
+        return sb.toString();
+    }
+
+    public static String generateScriptForDatalist(List<Player> players) {
+        String playerList = "var players = [";
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < players.size(); i++) {
+            if (i < players.size() - 1) {
+                playerList += "'" + players.get(i).getName() + "',";
+            } else {
+                playerList += "'" + players.get(i).getName() + "'";
+            }
+        }
+        playerList += "];";
+        sb.append("<script>");
+        sb.append(playerList);
+        sb.append(" autocomplete({\n"
+                + "  input: document.getElementById(\"SearchValue\"),"
+                + "fetch: function(text, update) { text = text.toLowerCase(); var suggestions = players.filter(n => n.label.toLowerCase().startsWith(text)) update(suggestions);}});");
+//
+//        sb.append(
+//                "        <script>(function (players) {\n"
+//                + "\n"
+//                + "                function addItems(list, container) {\n"
+//                + "                    list.forEach(function (item) {\n"
+//                + "                        const option = document.createElement('option');\n"
+//                + "\n"
+//                + "                        option.setAttribute('value', item);\n"
+//                + "                        container.appendChild(option);\n"
+//                + "                    });\n"
+//                + "                }\n"
+//                + "\n"
+//                + "                const playerList = " + playerList + ";\n"
+//                + "                addItems(playerList, players);\n"
+//                + "            }(document.getElementById('players')));"
+//                + "var input = document.getElementById('autocomplete');\n"
+//                + "input.focus();\n"
+//                + "input.select();</script>");
+        sb.append("</script>");
         return sb.toString();
     }
 }

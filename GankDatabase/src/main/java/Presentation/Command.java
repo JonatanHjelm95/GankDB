@@ -34,6 +34,8 @@ abstract class Command {
             commands.put("SortName", new SortNames());
             commands.put("SortGuild", new SortGuilds());
             commands.put("SortCreated", new SortCreated());
+            commands.put("SearchPlayer", new SearchPlayer());
+            commands.put("Search", new Search());
         }
         return commands.getOrDefault(commandName, new UnknownCommand());
     }
