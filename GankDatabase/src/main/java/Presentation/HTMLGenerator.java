@@ -77,9 +77,9 @@ public class HTMLGenerator {
     public static String Navigation() {
         StringBuilder sb = new StringBuilder();
         sb.append("<div class=\"topnav\">\n");
-        sb.append(" <div class=\"navTiles\">\n");
+//        sb.append(" <div class=\"navTiles\">\n");
         sb.append("     <ul>");
-        sb.append("        <li>");
+        sb.append("        <li class=\"listTiles\">");
         sb.append("         <form action=\"FrontController\" method=\"POST\">\n");
         sb.append("             <input class=\"menuTiles\" id=\"Home\" type=\"submit\" value=\"Home\">\n");
         sb.append("             <input type=\"hidden\" name=\"command\" value=\"Home\">\n");
@@ -97,14 +97,22 @@ public class HTMLGenerator {
         sb.append("              <input type=\"hidden\" name=\"command\" value=\"AllPlayers\">\n");
         sb.append("         </form>");
         sb.append("        </li>");
+        sb.append("        <li class=\"listTiles\">");
         sb.append("         <img id=\"mastHead\" src=\"icons/MastHead.png\">");
+        sb.append("        </li>");
+        sb.append("        <li class=\"listTilesRight\">");
+        sb.append("         <form action=\"FrontController\" method=\"POST\">\n");
+        sb.append("              <input class=\"menuTiles\" id=\"Search\" type=\"submit\" value=\"Search\">\n");
+        sb.append("              <input type=\"hidden\" name=\"command\" value=\"AllPlayers\">\n");
+        sb.append("         </form>");
+        sb.append("        </li>");
+
         sb.append("     </ul>");
-        sb.append(" </div>");
+//        sb.append(" </div>");
         sb.append("</div>");
 
         return sb.toString();
     }
-
 
     public static String allPlayersList(List<Player> players) {
         String classIcon = "icons/Ui-charactercreate-classes_";
