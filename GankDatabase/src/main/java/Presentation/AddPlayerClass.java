@@ -5,8 +5,12 @@
  */
 package Presentation;
 
+import Function.DBException;
+import Function.LogicFacade;
 import Function.LoginSampleException;
 import Function.Player;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,16 +25,15 @@ public class AddPlayerClass extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
-        Player player = (Player) request.getSession(true).getAttribute("Player");
-        System.out.println(player.getGender());
-        System.out.println(player.getRace());
-        System.out.println(request.getParameter("Class"));
-        if (!player.equals(null)) {
-            player.setWowClass(request.getParameter("Class"));
-            request.setAttribute("addPlayerNameAndLevel", HTMLGenerator.addPlayerNameAndLevel(player));
-            return "playerNameAndLevelPage";
+        Player player = (Player) request.getSession(false).getAttribute("player");
+        player.setWowClass(request.getParameter("Class"));
+        try {
+            LogicFacade.addPlayer(player);
+            return "index";
+        } catch (DBException ex) {
+            Logger.getLogger(AddPlayerClass.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return "index.jsp";
+        return "index";
     }
 
 }

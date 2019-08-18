@@ -25,7 +25,7 @@ public class AddPlayer extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
-        Player player = (Player) request.getSession(false).getAttribute("Player");
+        Player player = new Player();
         String charName = request.getParameter("charName");
         int level = Integer.parseInt(request.getParameter("level"));
         if (charName.length() > 1 && charName.length() < 13 && level > 0 && level < 61) {
@@ -39,22 +39,10 @@ public class AddPlayer extends Command {
             } else {
                 player.setGuild(request.getParameter("guild"));
             }
-            try {
-                LogicFacade.addPlayer(player);
-            } catch (DBException ex) {
-                Logger.getLogger(AddPlayer.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            if (!request.getParameter("notes").isEmpty()) {
-                String note = request.getParameter("notes");
-                try {
-                    LogicFacade.addPlayerNotes(player, note);
-                } catch (DBException ex) {
-                    Logger.getLogger(AddPlayer.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            return "index";
+            request.getSession(true).setAttribute("player", player);
+            request.setAttribute("addPlayerRaceAndGender", HTMLGenerator.AddPlayerRaceAndGender());
+            return "playerRaceAndGenderPage";
         }
-        return "index";
+        return "playerNameAndLevelPage";
     }
-
 }

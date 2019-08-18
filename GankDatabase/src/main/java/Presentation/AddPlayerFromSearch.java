@@ -6,7 +6,6 @@
 package Presentation;
 
 import Function.LoginSampleException;
-import Function.Player;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,18 +13,16 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author jonab
  */
-public class AddPlayerRaceAndGender extends Command {
+public class AddPlayerFromSearch extends Command {
 
-    public AddPlayerRaceAndGender() {
+    public AddPlayerFromSearch() {
     }
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
-        Player player = (Player) request.getSession(false).getAttribute("player");
-        player.setRace(request.getParameter("Race"));
-        player.setGender(request.getParameter("Gender"));
-        request.setAttribute("playerClassList", HTMLGenerator.AddPlayerClass(player));
-        return "playerClassPage";
+        String name = (String) request.getSession(false).getAttribute("suggestName");
+        request.setAttribute("addPlayerNameAndLevelFromSearch", HTMLGenerator.addPlayerNameAndLevelFromSearch(name));
+        return "playerNameAndLevelPageFromSearchPage";
     }
-
+    
 }

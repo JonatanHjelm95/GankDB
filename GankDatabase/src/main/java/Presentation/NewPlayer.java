@@ -20,8 +20,8 @@ public class NewPlayer extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
-        request.setAttribute("addPlayerRaceAndGender", HTMLGenerator.AddPlayerRaceAndGender());
-        return "newPlayerPage";
+        request.setAttribute("addPlayerNameAndLevel", HTMLGenerator.addPlayerNameAndLevel());
+        return "playerNameAndLevelPage";
     }
 
 }

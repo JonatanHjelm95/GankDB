@@ -25,7 +25,9 @@ public class SearchPlayer extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
+        String msg = "<p>Search for a player</p>";
         try {
+            request.setAttribute("msg", msg);
             List players = LogicFacade.getAllPlayers();
             request.setAttribute("DatalistScript", HTMLGenerator.generateScriptForDatalist(players));
             request.setAttribute("Datalist", HTMLGenerator.generateDatalist(players));

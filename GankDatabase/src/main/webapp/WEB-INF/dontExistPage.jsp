@@ -19,22 +19,16 @@
         <script src="autocomplete.js"></script>
         <link rel="stylesheet" href="autocomplete.css">
 
-           <!-- <%=request.getAttribute("DatalistScript")%> -->
 
-        </head>
-        <body>
-            <%=request.getAttribute("topnav")%>
-            <h1>Search</h1>
-            <%=request.getAttribute("msg")%>
+    </head>
+    <body>
+        <%=request.getAttribute("topnav")%>
+        <h1>Error</h1>
 
-           <!-- <%=request.getAttribute("Datalist")%> -->
+        <%=request.getAttribute("msg")%>
+
+        <%=request.getAttribute("playerDontExistPrompt")%>
 
 
-            <form action="FrontController" method="POST">
-                <input type="text" name="searchValue" id="SearchValue">
-                <input type="submit" name="command" value="Search">
-                <input type="hidden" name="playerName">  
-            </form>
-
-        </body>
-    </html>
+    </body>
+</html>
