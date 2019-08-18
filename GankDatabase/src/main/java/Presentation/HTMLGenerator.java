@@ -6,7 +6,11 @@
 package Presentation;
 
 import Function.ClassList;
+import Function.LogicFacade;
 import Function.Player;
+import Function.SorterCreated;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -71,13 +75,13 @@ public class HTMLGenerator {
         sb.append("</form>");
         return sb.toString();
     }
-    
+
     public static String addPlayerNameAndLevelFromSearch(String name) {
         StringBuilder sb = new StringBuilder();
         ClassList cl = new ClassList();
         sb.append("<form action=\"FrontController\" method=\"POST\">\n");
         sb.append("</h1>");
-        sb.append(" <input type=\"text\" name=\"charName\" placeholder=\"character name\" value=\""+name+"\">\n");
+        sb.append(" <input type=\"text\" name=\"charName\" placeholder=\"character name\" value=\"" + name + "\">\n");
         sb.append(" <input type=\"number\" name=\"level\" placeholder=\"character level\">\n");
 
         sb.append(" <h1>Guild</h1>\n");
@@ -89,6 +93,54 @@ public class HTMLGenerator {
         sb.append(" <input type=\"submit\" value=\"Next\">\n");
         sb.append(" <input type=\"hidden\" name=\"command\" value=\"addPlayer\">\n");
         sb.append("</form>");
+        return sb.toString();
+    }
+
+    public static List top5LatestPlayers(List<Player> players) {
+        List latest = new ArrayList();
+        Collections.sort(players, new SorterCreated());
+        for (int i = 0; i < 5; i++) {
+            latest.add(players.get(i));
+        }
+        return latest;
+    }
+
+    public static String trimDate(String date) {
+        date = date.substring(5, date.length());
+        return date;
+    }
+
+    public static String generateHitlistFeed(List<Player> players) {
+        String classIcon = "icons/Ui-charactercreate-classes_";
+        String raceIcon = "icons/Ui-charactercreate-races_";
+        String png = ".png";
+        List<Player> latest = top5LatestPlayers(players);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("<div id=\"hitlistFeedContainer\">\n");
+//        sb.append("     <div id=\"container\">\n");
+        sb.append(" <table id=\"hitlistFeed\">\n");
+        sb.append("     <th>Race</th>    <th>Class</th>   <th>Name</th>  <th>Level</th>  <th>Zone</th>   <th>Updated</th>\n");
+            sb.append("</table>");
+        sb.append("<div id=\"upperBorder\"></div>");
+        for (int i = 0; i < latest.size(); i++) {
+            classIcon = classIcon + latest.get(i).getWowClass().toLowerCase() + png;
+            raceIcon = raceIcon + latest.get(i).getRace().toLowerCase() + "-" + latest.get(i).getGender().toLowerCase() + png;
+            sb.append("         <div id=\"animate" + i + "\">\n");
+            sb.append("<tr> <td><img src=\"" + raceIcon + "\"></td><td><img src=\"" + classIcon + "\"></td><td>" + latest.get(i).getName() + "</td><td>" + latest.get(i).getLevel() + "</td><td>STV</td><td>" + trimDate(latest.get(i).getDate()) + "</td></tr>\n");
+            sb.append("         </div>\n");
+
+            classIcon = "icons/Ui-charactercreate-classes_";
+            raceIcon = "icons/Ui-charactercreate-races_";
+            png = ".png";
+
+//            sb.append("<div id =\"animate\"></div>\n");
+        }
+        sb.append("<div id=\"lowerBorder\"></div>");
+
+//        sb.append("     </div>\n");
+//        sb.append(" </table>\n");
+        sb.append("</div>\n");
         return sb.toString();
     }
 

@@ -5,9 +5,13 @@
  */
 package Presentation;
 
+import Function.DBException;
+import Function.LogicFacade;
 import Function.LoginSampleException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,13 +36,14 @@ public class FrontController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, DBException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
         try {
             Command action = Command.from(request);
             request.setAttribute("topnav", HTMLGenerator.Navigation());
+            request.setAttribute("hitlistFeed", HTMLGenerator.generateHitlistFeed(LogicFacade.getAllPlayers()));
             String view = action.execute(request, response);
             request.getRequestDispatcher("/WEB-INF/" + view + ".jsp").forward(request, response);
         } catch (LoginSampleException ex) {
@@ -47,6 +52,7 @@ public class FrontController extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
         }
     }
+   
 
     public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, UnsupportedEncodingException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -65,7 +71,11 @@ public class FrontController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (DBException ex) {
+            Logger.getLogger(FrontController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -79,7 +89,11 @@ public class FrontController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (DBException ex) {
+            Logger.getLogger(FrontController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
